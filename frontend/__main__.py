@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 from mistralai.client import MistralClient
 from mistralai.models.chat_completion import ChatMessage
 
+from frontend.utils import prompt_chat
+
 load_dotenv(dotenv_path=".env")
 
 
@@ -27,7 +29,7 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 if prompt := st.chat_input("What is up?"):
-    st.session_state.messages.append({"role": "user", "content": prompt})
+    st.session_state.messages.append({"role": "user", "content": prompt_chat(prompt)})
     with st.chat_message("user"):
         st.markdown(prompt)
 
